@@ -12,12 +12,12 @@ var wwwRedirectMiddleware   = require('../lib/middlewares/wwwRedirectMiddleware'
 
 // Middlewares
 app.use(compress());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' })); // for parsing application/x-www-form-urlencoded
 app.use(cors());
 app.use(wwwRedirectMiddleware);
 app.use(authMiddleware);
 app.use(apiLimitsMiddleware);
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
 // EJS HTML engine
